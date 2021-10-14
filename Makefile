@@ -50,7 +50,6 @@ fclean:
 	rm -f $(PUAR)
 	rm -f $(NAME)
 	cd $(LBDIR) && make fclean
-	rm __.SYMDEF\ SORTED
 	rm -f a.out
 
 .PHONY: all re clean fclean
