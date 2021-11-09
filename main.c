@@ -28,21 +28,17 @@ int printlists(t_list *a, t_list *b)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	fill_list(t_list *a, int argc, char **argv)
 {
-	t_list		*a;
-	t_list		*b;
-	t_list		*temp;
-	int			i;
+	int		i;
+	t_list	*temp;
 
-	a = malloc(sizeof(t_list *));
-	b = NULL;
 	i = 0;
 	temp = a;
 	while (i < (argc - 1))
 	{
 		if (!temp || ft_atoicheck(argv[i + 1]) == (long)2147483648)
-			return (err());
+			return (1);
 		temp->x = (int)ft_atoicheck(argv[i + 1]);
 		if (!(++i < (argc - 1)))
 			break ;
@@ -50,6 +46,67 @@ int main(int argc, char **argv)
 		temp = temp->next;
 	}
 	temp->next = NULL;
+	return (0);
+}
+
+int	check_list(t_list *a)
+{
+	t_list	*t1;
+	t_list	*t2;
+	int		i1;
+	int		i2;
+
+	t1 = a;
+	if (a->next == NULL)
+		return (0);
+	i1 = 0;
+	while (t1)
+	{
+		i2 = 0;
+		t2 = a;
+		while (t2)
+		{
+			if (t1->x == t2->x && i1 != i2)
+				return (1);
+			t2 = t2->next;
+			i2++;
+		}
+		t1 = t1->next;
+		i1++;
+	}
+	return (0);
+}
+
+int	free_list(t_list *a)
+{
+	t_list	*temp;
+
+	while (a)
+	{
+		temp = a;
+		a = a->next;
+		free(temp);
+	}
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_list		*a;
+	t_list		*b;
+
+	a = malloc(sizeof(t_list *));
+	b = NULL;
+	if (fill_list(a, argc, argv) != 0)
+	{
+		free_list(a);
+		return(1);
+	}
+	if (check_list(a) != 0)
+	{
+		free_list(a);
+		return(1);
+	}
 	push_swap(&a, &b);
 	printlists(a, b);
 	return (1);

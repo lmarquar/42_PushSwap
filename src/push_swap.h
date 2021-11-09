@@ -15,6 +15,8 @@ typedef struct s_list
 int		push_swap(t_list **a, t_list **b);
 long	ft_atoicheck(char *nptr);
 int		err(void);
+int		get_size(t_list *x);
+
 int		sa(t_list *a);
 int		sb(t_list *b);
 int		ss(t_list *a, t_list *b);
@@ -24,5 +26,6 @@ int		ra(t_list **a);
 int		rb(t_list **b);
 int		rr(t_list **a, t_list **b);
 int		rra(t_list **a);
+int		sort(t_list **a, t_list **b);
 
 #endif

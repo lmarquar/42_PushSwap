@@ -1,5 +1,18 @@
 #include "push_swap.h"
 
+int		get_size(t_list *x)
+{
+	int	res;
+
+	res = 0;
+	while (x)
+	{
+		x = x->next;
+		res++;
+	}
+	return (res);
+}
+
 long	ft_atoicheck(char *nptr)
 {
 	int			i;

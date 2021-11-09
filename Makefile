@@ -5,7 +5,8 @@ NAME	:= push_swap
 PUAR	:= push_swap.a
 PUDIR	:= src/
 PSRC	:= push_swap.c push_swap_utils.c push_swap_commands.c \
-			 push_swap_commands2.c push_swap_commands3.c
+			 push_swap_commands2.c push_swap_commands3.c \
+			 push_swap_sort.c
 POBJ	:= $(PSRC:.c=.o)
 LBDIR	:= libft/
 LBAR	:= libft/libft.a
@@ -42,8 +43,8 @@ $(LBAR):
 clean:
 	rm -f $(POBJ) $(LOBJ)
 	rm -f $(PUAR)
-	rm __.SYMDEF\ SORTED
 	cd $(LBDIR) && make fclean
+	rm __.SYMDEF\ SORTED
 
 fclean:
 	rm -f $(POBJ) $(LOBJ)
