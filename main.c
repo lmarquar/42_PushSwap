@@ -40,6 +40,7 @@ int	fill_list(t_list *a, int argc, char **argv)
 		if (!temp || ft_atoicheck(argv[i + 1]) == (long)2147483648)
 			return (1);
 		temp->x = (int)ft_atoicheck(argv[i + 1]);
+		temp->p = 0;
 		if (!(++i < (argc - 1)))
 			break ;
 		temp->next = malloc(sizeof(t_list *));

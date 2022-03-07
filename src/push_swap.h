@@ -4,12 +4,14 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include "../libft/libft.h"
 
 # include <stdio.h>
 typedef struct s_list
 {
-	int				x;
+	int	x;
+	int	p;	
 	struct s_list	*next;
 }	t_list;
 int		push_swap(t_list **a, t_list **b);
@@ -28,4 +30,5 @@ int		rr(t_list **a, t_list **b);
 int		rra(t_list **a);
 int		sort(t_list **a, t_list **b);
 
+int		find_median(t_list *a);
 #endif
