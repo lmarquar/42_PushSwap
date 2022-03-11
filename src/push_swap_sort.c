@@ -49,11 +49,17 @@ int	recursive_one(t_list **a, t_list **b)
 	    pb(a, b);
 	    (*b)->p = pos;
 	}
+	if ((*a)->x == m)
+	{
+		pb(a, b);
+		rb(b);
+	}
 	else
 	    ra(a);
 	i++;
     }
     pos++;
+	rrb(b);
     recursive_one(a, b);
 
     return (0);
@@ -85,22 +91,22 @@ int	recursive_two(t_list **a, t_list **b)
     k = get_size_b(*b);
     if (k <= 2) 
     {
-	if ((*b) < (*b)->next)
-	    sb(*b);
-	pa(a, b);
-	pa(a, b);
-	return (0);
+		if ((*b) < (*b)->next)
+		    sb(*b);
+		pa(a, b);
+		pa(a, b);
+		return (0);
     }
     k = get_size_b(*b);
     m = find_median(*b);
     printf("med: %d\n", m);
     while ((*b)->p == pos && k > 0)
     {
-	if ((*b)->x > m)
-	    pa(a, b);
-	else
-	    rb(b);
-	k--;
+		if ((*b)->x > m)
+		    pa(a, b);
+		else
+		    rb(b);
+		k--;
     }
     recursive_two(a, b);
     return (0);
