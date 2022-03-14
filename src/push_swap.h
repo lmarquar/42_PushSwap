@@ -28,6 +28,7 @@ int		ra(t_list **a);
 int		rb(t_list **b);
 int		rr(t_list **a, t_list **b);
 int		rra(t_list **a);
+int		rrb(t_list **b);
 int		sort(t_list **a, t_list **b);
 
 int		find_median(t_list *a);

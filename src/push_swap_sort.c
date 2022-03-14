@@ -129,7 +129,7 @@ int	sort(t_list **a, t_list **b)
     recursive_two(a, b);   
     printf("hhhhh%d", checkifordered(*a));
     if (checkifordered(*a))
-	recursive_one(a, b);
+		recursive_one(a, b);
     recursive_two(a, b);
 
 
