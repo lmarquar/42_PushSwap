@@ -18,6 +18,7 @@ int		push_swap(t_list **a, t_list **b);
 long	ft_atoicheck(char *nptr);
 int		err(void);
 int		get_size(t_list *x);
+int		get_size_end(t_list *x);
 
 int		sa(t_list *a);
 int		sb(t_list *b);
@@ -32,4 +33,5 @@ int		rrb(t_list **b);
 int		sort(t_list **a, t_list **b);
 
 int		find_median(t_list *a);
+int		find_median_end(t_list *a);
 #endif

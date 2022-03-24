@@ -3,6 +3,7 @@
 int printlists(t_list *a, t_list *b)
 {
 	char	*s;
+	char	c;
 	int		i;
 
 	write(1, "a:\n", 3);
@@ -12,6 +13,11 @@ int printlists(t_list *a, t_list *b)
 		i = 0;
 		while (s[i])
 			write(1, &s[i++], 1);
+		write(1, ", ", 2);
+		c = a->p + '0';
+		write(1, &c, 1);
+		free(s);
+		
 		a = a->next;
 		write(1, "\n", 1);
 	}
@@ -22,6 +28,9 @@ int printlists(t_list *a, t_list *b)
 		i = 0;
 		while (s[i])
 			write(1, &s[i++], 1);
+		write(1, ", ", 2);
+		c = b->p + '0';
+		write(1, &c, 1);
 		b = b->next;
 		write(1, "\n", 1);
 	}
