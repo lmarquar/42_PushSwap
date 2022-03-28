@@ -18,7 +18,9 @@ void	ft_putnbr_fd(int n, int fd)
 	long	nl;
 
 	nl = n;
-	if (nl < -9 || nl > 9)
+	if (n == 0)
+		write(1, "0", 1);
+	else if (nl < -9 || nl > 9)
 	{
 		if (nl < -9)
 			c = ((nl * -1) % 10) + '0';

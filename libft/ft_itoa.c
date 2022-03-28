@@ -49,7 +49,7 @@ char	*ft_itoa(int n)
 		nl = nl / 10;
 	}
 	nl = n;
-	s = malloc(i + 1);
+	s = ft_calloc(i + 1, 1);
 	res = transform(s, nl, i);
 	return (res);
 }

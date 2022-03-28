@@ -69,15 +69,27 @@ int	recursive_two(t_list **a, t_list **b)
     int k;
     int m;
     int	pos;
+	int npos;
 
     pos = (*b)->p;
+	npos = pos * 10;
+	if (npos < (*a)->p)
+		npos = (*a)->p;
     k = get_size(*b);
+	if (k == 1)
+	{
+		pa(a, b);
+		(*a)->p = npos;
+		return (0);
+	}
     if (k <= 2) 
     {
 		if ((*b) < (*b)->next)
 		    sb(*b);
 		pa(a, b);
+		(*a)->p = npos;
 		pa(a, b);
+		(*a)->p = npos;
 		return (0);
     }
     k = get_size(*b);
@@ -88,6 +100,7 @@ int	recursive_two(t_list **a, t_list **b)
 		if ((*b)->x >= m)
 		{
 		    pa(a, b);
+			(*a)->p = npos;
 			printf("%d\n", (*a)->x);
 			if ((*a)->x == m)
 				ra(a);
@@ -98,9 +111,24 @@ int	recursive_two(t_list **a, t_list **b)
     }
 	rra(a);
 	//reversepart:
+	npos = npos + 1;
 	k = get_size_end(*b);
 	m = find_median_end(*b);
 	printf("size_b_end: %d\nfind_med_end: %d\n", k, m);
+	while (k > 0)
+	{
+		rrb(b);
+		if ((*b)->x >= m)
+		{
+			pa(a, b);
+			(*a)->p = npos;
+			if ((*a)->x == m)
+				ra(a);
+		}
+		k--;
+	}
+	rra(a);
+	recursive_two(a, b);
     return (0);
 }
 
@@ -118,6 +146,8 @@ int	checkifordered(t_list *a)
 int	sort(t_list **a, t_list **b)
 {
     recursive_one(a, b);
+	printf("\n\n\n");	
+    recursive_two(a, b); 
     recursive_two(a, b); 
 /*    printf("hhhhh%d", checkifordered(*a));
     if (checkifordered(*a))
