@@ -4,31 +4,20 @@
 
 int printlists(t_list *a, t_list *b)
 {
-	char	*s;
-	int		i;
-
 	write(1, "a:\n", 3);
 	while (a)
 	{
-		s = ft_itoa(a->x);
-		i = 0;
-		while (s[i])
-			write(1, &s[i++], 1);
-		free(s);
+		ft_putnbr_fd(a->x, 1);
 		write(1, ", ", 2);
 		ft_putnbr_fd(a->p, 1);
 		a = a->next;
 		write(1, "\n", 1);
-		s = NULL;
 	}
 	printf("mystring: %s\n", ft_itoa(251));
 	write(1, "\nb:\n", 4);
 	while (b)
 	{
-		s = ft_itoa(b->x);
-		i = 0;
-		while (s[i])
-			write(1, &s[i++], 1);
+		ft_putnbr_fd(b->x, 1);
 		write(1, ", ", 2);
 		ft_putnbr_fd(b->p, 1);
 		b = b->next;

@@ -19,6 +19,7 @@ long	ft_atoicheck(char *nptr);
 int		err(void);
 int		get_size(t_list *x);
 int		get_size_end(t_list *x);
+int		round_2up10(int x);
 
 int		sa(t_list *a);
 int		sb(t_list *b);
