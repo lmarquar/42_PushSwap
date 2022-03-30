@@ -14,12 +14,12 @@ typedef struct s_list
 	int	p;	
 	struct s_list	*next;
 }	t_list;
+int		printlists(t_list *a, t_list *b);
 int		push_swap(t_list **a, t_list **b);
 long	ft_atoicheck(char *nptr);
 int		err(void);
 int		get_size(t_list *x);
 int		get_size_end(t_list *x);
-int		round_2up10(int x);
 
 int		sa(t_list *a);
 int		sb(t_list *b);

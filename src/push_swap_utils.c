@@ -1,24 +1,5 @@
 #include "push_swap.h"
 
-int round_2up10(int x)
-{
-	int m;
-
-	m = 0;
-	while (x)
-	{
-		x = x / 10;
-		m++;
-	}
-	x = 1;
-	while (m > 0)
-	{
-		x = x * 10;
-		m--;
-	}
-	return (x);
-}
-
 int find_median_end2(t_list *a, int size, int med, int k)
 {
 	int		i;

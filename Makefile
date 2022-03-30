@@ -50,6 +50,7 @@ fclean:
 	rm -f $(POBJ) $(LOBJ)
 	rm -f $(PUAR)
 	rm -f $(NAME)
+	cd $(PUDIR) && rm -f $(POBJ)
 	cd $(LBDIR) && make fclean
 	rm -f a.out
 
