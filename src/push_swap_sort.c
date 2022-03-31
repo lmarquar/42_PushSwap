@@ -30,7 +30,6 @@ int get_last(t_list *x)
 
 int	sort3(t_list **a, t_list **b, int k)
 {
-    printf("k: %d\n", k);
     if (k == 1)
 		return (0);
     if (k == 2)
@@ -57,7 +56,6 @@ int	sort3(t_list **a, t_list **b, int k)
 
 int	sort3_b(t_list **a, t_list **b, int k)
 {
-    printf("k: %d\n", k);
     if (k == 1)
 		return (0);
     if (k == 2)
@@ -92,7 +90,7 @@ int p_to_null(t_list *a)
 	return (0);
 }
 
-int	recursive_atob(t_list **a, t_list **b)
+int recursive_first(t_list **a, t_list **b)
 {
     int m;
     int	k;
@@ -103,6 +101,42 @@ int	recursive_atob(t_list **a, t_list **b)
 		p = 1;
 	else
 		p = (*b)->p + 1;
+	k = get_size(*a);
+    if (k <= 3)
+    {
+		sort3(a, b, k);
+		return (0);
+    }
+    m = find_median(*a);
+   	i = 0;
+    while (i < k)
+    {
+		if ((*a)->x <= m)
+		{
+		    pb(a, b);
+		    (*b)->p = p;
+			if ((*b)->x == m)
+				rb(b);
+		}
+		else
+		    ra(a);
+		i++;
+    }
+	rrb(b);
+	if (sorted(*a))
+		return (0);
+	recursive_first(a, b);
+	return (0);
+}
+
+int	recursive_atob(t_list **a, t_list **b)
+{
+    int m;
+    int	k;
+    int i;
+    int	p;
+
+	p = (*b)->p + 1;
     k = get_size(*a);
     if (k <= 3)
     {
@@ -110,11 +144,9 @@ int	recursive_atob(t_list **a, t_list **b)
 		return (0);
     }
     m = find_median(*a);
-	printf("median: %d\nsize_a_before: %d", m, get_size(*a));
    	i = 0;
     while (i < k)
     {
-		printf("current element: %d i: %d\n", (*a)->x, i);
 		if ((*a)->x <= m)
 		{
 		    pb(a, b);
@@ -142,12 +174,9 @@ int	recursive_atob(t_list **a, t_list **b)
 		return (0);
     }
     m = find_median_end(*a);
-	printf("median_end: %d\nsize_a_end_before: %d", m, get_size(*a));
-   	i = 0;
 	while (i < k)
     {
 		rra(a);
-		printf("current element: %d i: %d\n", (*a)->x, i);
 		if ((*a)->x <= m)
 		{
 		    pb(a, b);
@@ -169,7 +198,6 @@ int	recursive_atob(t_list **a, t_list **b)
 
 int	recursive_main(t_list **a, t_list **b)
 {
-	printf("\nstartofrecursivecall:\n");
 	if (!sorted(*a))
 		recursive_atob(a, b);
 	else
@@ -198,14 +226,12 @@ int	recursive_main(t_list **a, t_list **b)
 	else if ((*b)->p == p && k > 0)
 	{
 	    m = find_median(*b);
-	    printf("med: %d\n", m);
 	    while ((*b)->p == p && k > 0)
 	    {
 			if ((*b)->x >= m)
 			{
 			    pa(a, b);
 				(*a)->p = np;
-				printf("%d\n", (*a)->x);
 				if ((*a)->x == m)
 					ra(a);
 			}
@@ -217,10 +243,7 @@ int	recursive_main(t_list **a, t_list **b)
 	}
 	//recursively compute new elements on stack a
 	if (get_size(*a) > 3 && !sorted(*a))
-	{
-		printlists(*a, *b);
 		recursive_main(a, b);
-	}
 
 	if (!(*b))
 		return (0);
@@ -230,7 +253,6 @@ int	recursive_main(t_list **a, t_list **b)
 		np = np + 1;
 		k = get_size_end(*b);
 		m = find_median_end(*b);
-		printf("size_b_end: %d\nfind_med_end: %d\n", k, m);
 		while (k > 0)
 		{
 			rrb(b);
@@ -245,7 +267,7 @@ int	recursive_main(t_list **a, t_list **b)
 		}
 		rra(a);
 	}
-	recursive_main(a, b);
+	//recursive_main(a, b);
 	return (0);
 }
 
@@ -262,14 +284,7 @@ int	checkifordered(t_list *a)
 
 int	sort(t_list **a, t_list **b)
 {
-   recursive_main(a, b);
-  // printf("pointofsenslessmeaninglessendlesssuffering");
-   //sorted(*a);
-
-/*    printf("hhhhh%d", checkifordered(*a));
-    if (checkifordered(*a))
-		recursive_one(a, b);
-    recursive_two(a, b);
-   */ 
+	recursive_first(a, b);
+	recursive_main(a, b);
     return (0);
 }

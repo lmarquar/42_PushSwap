@@ -1,7 +1,5 @@
 #include "src/push_swap.h"
 
-#include <stdio.h>
-
 int printlists(t_list *a, t_list *b)
 {
 	write(1, "a:\n", 3);
@@ -13,7 +11,6 @@ int printlists(t_list *a, t_list *b)
 		a = a->next;
 		write(1, "\n", 1);
 	}
-	printf("mystring: %s\n", ft_itoa(251));
 	write(1, "\nb:\n", 4);
 	while (b)
 	{
