@@ -22,7 +22,7 @@ int	sorted(t_list *a)
 			return (0);	
 		a = a->next;
 	}
-	p_to_null(a);
+	//p_to_null(a);
 	return (1);
 }	
 
@@ -151,7 +151,7 @@ int	recursive_atob(t_list **a, t_list **b)
 		if (k <= 3)
 		{
 			sort3(a, b, k);
-			p_to_null(*a);
+//			p_to_null(*a);
 			return (0);
 		}
 		m = find_median(*a);
@@ -183,7 +183,7 @@ int	recursive_atob(t_list **a, t_list **b)
 		while (p-- > 0)
 			rra(a);
 		sort3(a, b, k);
-		p_to_null(*a);
+//		p_to_null(*a);
 		return (0);
 	}
 	m = find_median_end(*a);
@@ -204,7 +204,7 @@ int	recursive_atob(t_list **a, t_list **b)
 
 	if (!sorted(*a))
 		recursive_atob(a, b);
-	p_to_null(*a);	
+//	p_to_null(*a);	
 	return (0);
 }
 
@@ -237,8 +237,8 @@ int	recursive_main(t_list **a, t_list **b)
 			pa(a, b);
 			k--;
 		}
-		p_to_null(*a);
-		recursive_main(a, b);
+//		p_to_null(*a);
+//		recursive_main(a, b);
 	}
 	else if ((*b)->p == p && k > 0)
 	{
@@ -263,8 +263,8 @@ int	recursive_main(t_list **a, t_list **b)
 	if (get_size(*a) >= 3 && !sorted(*a))
 		recursive_main(a, b);
 
-	write(1, "\nMARK1:\n", 9);
-	printlists(*a, *b);
+//	write(1, "\nMARK1:\n", 9);
+//	printlists(*a, *b);
 	if (!(*b))
 		return (0);
 	//reversepart:
@@ -287,7 +287,7 @@ int	recursive_main(t_list **a, t_list **b)
 		}
 		rra(a);
 	}
-//	recursive_main(a, b);
+	recursive_main(a, b);
 	return (0);
 }
 
@@ -305,11 +305,8 @@ int	checkifordered(t_list *a)
 int	sort(t_list **a, t_list **b)
 {
 	recursive_first(a, b);
+//	write(1, "\nSTART\n", 9);
 	recursive_main(a, b);
-	recursive_main(a, b);
-	recursive_main(a, b);
-	write(1, "\nSTART\n", 9);
-	recursive_main(a, b);
-	printlists(*a, *b);
+//	printlists(*a, *b);
 	return (0);
 }
