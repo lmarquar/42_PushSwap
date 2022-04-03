@@ -1,5 +1,14 @@
 #include "push_swap.h"
 
+int p_to_null(t_list *a)
+{
+	while (a)
+	{
+		a->p = 0;
+		a = a->next;
+	}
+	return (0);
+}
 
 int	sorted(t_list *a)
 {
@@ -13,6 +22,7 @@ int	sorted(t_list *a)
 			return (0);	
 		a = a->next;
 	}
+	p_to_null(a);
 	return (1);
 }	
 
@@ -23,6 +33,15 @@ int get_last(t_list *x)
 	while (x->next)
 		x = x->next;
 	return (x->x);
+}
+
+int get_last_p(t_list *x)
+{
+	if (!x)
+		return (0);
+	while (x->next)
+		x = x->next;
+	return (x->p);
 }
 
 int	sort3(t_list **a, t_list **b, int k)
@@ -77,15 +96,7 @@ int	sort3_b(t_list **a, t_list **b, int k)
 	return (0);
 }
 
-int p_to_null(t_list *a)
-{
-	while (a)
-	{
-		a->p = 0;
-		a = a->next;
-	}
-	return (0);
-}
+
 
 int recursive_first(t_list **a, t_list **b)
 {
@@ -133,31 +144,35 @@ int	recursive_atob(t_list **a, t_list **b)
 	int i;
 	int	p;
 
-	p = (*b)->p + 1;
-	k = get_size(*a);
-	if (k <= 3)
+	if ((*a)->p >= get_last_p(*a)) 
 	{
-		sort3(a, b, k);
-		return (0);
-	}
-	m = find_median(*a);
-	i = 0;
-	while (i < k)
-	{
-		if ((*a)->x <= m)
+		p = (*b)->p + 1;
+		k = get_size(*a);
+		if (k <= 3)
 		{
-			pb(a, b);
-			(*b)->p = p;
-			if ((*b)->x == m)
-				rb(b);
+			sort3(a, b, k);
+			p_to_null(*a);
+			return (0);
 		}
-		else
-			ra(a);
-		i++;
+		m = find_median(*a);
+		i = 0;
+		while (i < k)
+		{
+			if ((*a)->x <= m)
+			{
+				pb(a, b);
+				(*b)->p = p;
+				if ((*b)->x == m)
+					rb(b);
+			}
+			else
+				ra(a);
+			i++;
+		}
+		rrb(b);
+		if (sorted(*a))
+			return (0);
 	}
-	rrb(b);
-	if (sorted(*a))
-		return (0);
 
 	//reverspart
 	p = (*b)->p + 1;
@@ -168,6 +183,7 @@ int	recursive_atob(t_list **a, t_list **b)
 		while (p-- > 0)
 			rra(a);
 		sort3(a, b, k);
+		p_to_null(*a);
 		return (0);
 	}
 	m = find_median_end(*a);
@@ -188,7 +204,7 @@ int	recursive_atob(t_list **a, t_list **b)
 
 	if (!sorted(*a))
 		recursive_atob(a, b);
-
+	p_to_null(*a);	
 	return (0);
 }
 
@@ -221,6 +237,8 @@ int	recursive_main(t_list **a, t_list **b)
 			pa(a, b);
 			k--;
 		}
+		p_to_null(*a);
+		recursive_main(a, b);
 	}
 	else if ((*b)->p == p && k > 0)
 	{
@@ -242,9 +260,11 @@ int	recursive_main(t_list **a, t_list **b)
 	}
 
 	//recursively compute new elements on stack a
-	if (get_size(*a) > 3 && !sorted(*a))
+	if (get_size(*a) >= 3 && !sorted(*a))
 		recursive_main(a, b);
 
+	write(1, "\nMARK1:\n", 9);
+	printlists(*a, *b);
 	if (!(*b))
 		return (0);
 	//reversepart:
@@ -267,7 +287,7 @@ int	recursive_main(t_list **a, t_list **b)
 		}
 		rra(a);
 	}
-	recursive_main(a, b);
+//	recursive_main(a, b);
 	return (0);
 }
 
@@ -286,5 +306,10 @@ int	sort(t_list **a, t_list **b)
 {
 	recursive_first(a, b);
 	recursive_main(a, b);
+	recursive_main(a, b);
+	recursive_main(a, b);
+	write(1, "\nSTART\n", 9);
+	recursive_main(a, b);
+	printlists(*a, *b);
 	return (0);
 }
