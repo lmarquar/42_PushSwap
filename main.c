@@ -104,6 +104,5 @@ int	main(int argc, char **argv)
 		return(1);
 	}
 	push_swap(&a, &b);
-	printlists(a, b);
 	return (1);
 }
