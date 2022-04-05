@@ -95,7 +95,6 @@ int	sort3_b_pa(t_list **a, t_list **b, int k)
 		k--;
 	}
 	p_to_null(*a);
-
 	return (0);
 }
 
@@ -225,10 +224,10 @@ int	recursive_main(t_list **a, t_list **b)
 	int	p;
 	int np;
 
-	write(1, "\nMARK0:\n", 9);
+//	write(1, "\nMARK0:\n", 9);
 	if ((*b)->x > get_last(*b))
 	{
-		printlists(*a, *b);
+//		printlists(*a, *b);
 		if (!(*b))
 			return (0);
 		k = get_size(*b);
@@ -259,12 +258,11 @@ int	recursive_main(t_list **a, t_list **b)
 		}
 	}
 
-	write(1, "\nMARK1:\n", 9);
-	printlists(*a, *b);
+//	write(1, "\nMARK1:\n", 9);
+//	printlists(*a, *b);
 	//recursively compute new elements on stack a
 	if (!sorted(*a))
 		recursive_main(a, b);
-
 	if (!(*b))
 		return (0);
 	k = get_size_end(*b);
@@ -275,7 +273,8 @@ int	recursive_main(t_list **a, t_list **b)
 			rrb(b);
 		sort3_b_pa(a, b, k);
 	}
-
+	if (!*b)
+		return (0);
 	//reversepart:
 	if ((*b)->x < get_last(*b))
 	{
