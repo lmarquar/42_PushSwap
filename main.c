@@ -26,22 +26,20 @@ int printlists(t_list *a, t_list *b)
 int	fill_list(t_list *a, int argc, char **argv)
 {
 	int		i;
-	t_list	*temp;
 
 	i = 0;
-	temp = a;
 	while (i < (argc - 1))
 	{
-		if (!temp || ft_atoicheck(argv[i + 1]) == (long)2147483648)
+		if (!a || ft_atoicheck(argv[i + 1]) == (long)2147483648)
 			return (1);
-		temp->x = (int)ft_atoicheck(argv[i + 1]);
-		temp->p = 0;
+		a->x = (int)ft_atoicheck(argv[i + 1]);
+		a->p = 0;
 		if (!(++i < (argc - 1)))
 			break ;
-		temp->next = malloc(sizeof(t_list *));
-		temp = temp->next;
+		a->next = malloc(sizeof(t_list *));
+		a = a->next;
 	}
-	temp->next = NULL;
+	a->next = NULL;
 	return (0);
 }
 
@@ -104,6 +102,7 @@ int	main(int argc, char **argv)
 		return(1);
 	}
 	push_swap(&a, &b);
+	free_list(a);
 //	printlists(a, b);
 	return (1);
 }
