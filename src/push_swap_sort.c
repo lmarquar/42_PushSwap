@@ -1,105 +1,5 @@
 #include "push_swap.h"
 
-int p_to_null(t_list *a)
-{
-	while (a)
-	{
-		a->p = 0;
-		a = a->next;
-	}
-	return (0);
-}
-
-int	sorted(t_list *a)
-{
-	if (!a)
-		return (1);
-	if (!(a->next))
-		return (1);
-	while (a->next)
-	{
-		if (a->x > a->next->x)
-			return (0);	
-		a = a->next;
-	}
-	p_to_null(a);
-	return (1);
-}	
-
-int get_last(t_list *x)
-{
-	if (!x)
-		return (0);
-	while (x->next)
-		x = x->next;
-	return (x->x);
-}
-
-int get_last_p(t_list *x)
-{
-	if (!x)
-		return (0);
-	while (x->next)
-		x = x->next;
-	return (x->p);
-}
-
-int	sort3(t_list **a, t_list **b, int k)
-{
-	if (k == 2)
-	{
-		if ((*a)->x > (*a)->next->x)
-			sa(*a);
-		return (0);
-	}
-	else if (k == 3)
-	{
-		if ((*a)->x > (*a)->next->x && (*a)->x > (*a)->next->next->x)
-			sa(*a);
-		if ((*a)->next->x > (*a)->next->next->x && (*a)->x < (*a)->next->x)
-		{	
-			pb(a, b);
-			sa(*a);
-			pa(a, b);
-		}
-		if ((*a)->x > (*a)->next->x)
-			sa(*a);
-	}
-	p_to_null(*a);
-	return (0);
-}
-
-int	sort3_b_pa(t_list **a, t_list **b, int k)
-{
-	if (k == 2)
-	{
-		if ((*b)->x < (*b)->next->x)
-			sb(*b);
-	}
-	else if (k == 3)
-	{
-		if ((*b)->x < (*b)->next->x && (*b)->x < (*b)->next->next->x)
-			sb(*b);
-		if ((*b)->next->x < (*b)->next->next->x && (*b)->x > (*b)->next->x)
-		{	
-			pa(a, b);
-			sb(*b);
-			pb(a, b);
-		}
-		if ((*b)->x < (*b)->next->x)
-			sb(*b);
-	}
-	while (k > 0)
-	{
-		pa(a, b);
-		k--;
-	}
-	p_to_null(*a);
-	return (0);
-}
-
-
-
 int recursive_first(t_list **a, t_list **b)
 {
 	int m;
@@ -209,20 +109,6 @@ int	recursive_atob(t_list **a, t_list **b)
 	return (0);
 }
 
-int get_biggest(t_list *x)
-{
-	int b;
-
-	b = x->x;
-	while (x->next)
-	{
-		x = x->next;
-		if (b < x->x)
-			b = x->x;
-	}
-	return (b);
-}
-
 int	recursive_main(t_list **a, t_list **b)
 {
 	if (!sorted(*a))
@@ -237,10 +123,8 @@ int	recursive_main(t_list **a, t_list **b)
 	int	p;
 	int np;
 
-//	write(1, "\nMARK0:\n", 9);
 	if ((*b)->x > get_last(*b))
 	{
-//		printlists(*a, *b);
 		if (!(*b))
 			return (0);
 		if ((*b)->x == get_biggest(*b))
@@ -275,8 +159,6 @@ int	recursive_main(t_list **a, t_list **b)
 		}
 	}
 
-//	write(1, "\nMARK1:\n", 9);
-//	printlists(*a, *b);
 	//recursively compute new elements on stack a
 	if (!sorted(*a))
 		recursive_main(a, b);
@@ -330,8 +212,6 @@ int	checkifordered(t_list *a)
 int	sort(t_list **a, t_list **b)
 {
 	recursive_first(a, b);
-//	write(1, "\nSTART\n", 9);
 	recursive_main(a, b);
-	//printlists(*a, *b);
 	return (0);
 }

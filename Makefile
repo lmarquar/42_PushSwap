@@ -6,7 +6,7 @@ PUAR	:= push_swap.a
 PUDIR	:= src/
 PSRC	:= push_swap.c push_swap_utils.c push_swap_commands.c \
 			 push_swap_commands2.c push_swap_commands3.c \
-			 push_swap_sort.c
+			 push_swap_sort.c find_median.c small_funcs.c sort3.c
 POBJ	:= $(PSRC:.c=.o)
 LBDIR	:= libft/
 LBAR	:= libft/libft.a

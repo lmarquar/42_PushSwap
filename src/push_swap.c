@@ -60,6 +60,15 @@ int	push_swap(t_list **a, t_list **b)
 	int i;
 
 	temp = *a;
+	while (temp)
+	{
+		if (!(temp->next))
+			return (0);
+		if (temp->next->x < temp->x)
+			break ;
+		temp = temp->next;
+	}
+	temp = *a;
 	i = 0;
 	while(i <= 5 && temp)
 	{

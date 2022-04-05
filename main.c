@@ -1,6 +1,6 @@
 #include "src/push_swap.h"
 
-int printlists(t_list *a, t_list *b)
+int	printlists(t_list *a, t_list *b)
 {
 	write(1, "a:\n", 3);
 	while (a)
@@ -30,6 +30,7 @@ int	fill_list(t_list *a, int argc, char **argv)
 	i = 0;
 	while (i < (argc - 1))
 	{
+		a->next = NULL;
 		if (!a || ft_atoicheck(argv[i + 1]) == (long)2147483648)
 			return (1);
 		a->x = (int)ft_atoicheck(argv[i + 1]);
@@ -94,15 +95,14 @@ int	main(int argc, char **argv)
 	if (fill_list(a, argc, argv) != 0)
 	{
 		free_list(a);
-		return(1);
+		return (1);
 	}
 	if (check_list(a) != 0)
 	{
 		free_list(a);
-		return(1);
+		return (1);
 	}
 	push_swap(&a, &b);
 	free_list(a);
-//	printlists(a, b);
 	return (1);
 }
