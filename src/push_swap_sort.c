@@ -36,7 +36,7 @@ int recursive_first(t_list **a, t_list **b)
 	if (sorted(*a))
 		return (0);
 	recursive_first(a, b);
-	return (0);
+	return (1);
 }
 
 int	recursive_atob(t_list **a, t_list **b)
@@ -198,19 +198,10 @@ int	recursive_main(t_list **a, t_list **b)
 	return (0);
 }
 
-int	checkifordered(t_list *a)
-{
-	while (a->next)
-	{
-		if (a->next->x < a->x)
-			return (1);
-		a = a->next;
-	}
-	return (0);
-}
-
 int	sort(t_list **a, t_list **b)
 {
+//	while(!recursive_first(a, b))
+//		;
 	recursive_first(a, b);
 	recursive_main(a, b);
 	return (0);
