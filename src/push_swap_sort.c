@@ -22,7 +22,7 @@ int	sorted(t_list *a)
 			return (0);	
 		a = a->next;
 	}
-	//p_to_null(a);
+	p_to_null(a);
 	return (1);
 }	
 
@@ -46,15 +46,13 @@ int get_last_p(t_list *x)
 
 int	sort3(t_list **a, t_list **b, int k)
 {
-	if (k == 1)
-		return (0);
 	if (k == 2)
 	{
 		if ((*a)->x > (*a)->next->x)
 			sa(*a);
 		return (0);
 	}
-	if (k == 3)
+	else if (k == 3)
 	{
 		if ((*a)->x > (*a)->next->x && (*a)->x > (*a)->next->next->x)
 			sa(*a);
@@ -67,20 +65,18 @@ int	sort3(t_list **a, t_list **b, int k)
 		if ((*a)->x > (*a)->next->x)
 			sa(*a);
 	}
+	p_to_null(*a);
 	return (0);
 }
 
-int	sort3_b(t_list **a, t_list **b, int k)
+int	sort3_b_pa(t_list **a, t_list **b, int k)
 {
-	if (k == 1)
-		return (0);
 	if (k == 2)
 	{
 		if ((*b)->x < (*b)->next->x)
 			sb(*b);
-		return (0);
 	}
-	if (k == 3)
+	else if (k == 3)
 	{
 		if ((*b)->x < (*b)->next->x && (*b)->x < (*b)->next->next->x)
 			sb(*b);
@@ -93,6 +89,13 @@ int	sort3_b(t_list **a, t_list **b, int k)
 		if ((*b)->x < (*b)->next->x)
 			sb(*b);
 	}
+	while (k > 0)
+	{
+		pa(a, b);
+		k--;
+	}
+	p_to_null(*a);
+
 	return (0);
 }
 
@@ -151,7 +154,6 @@ int	recursive_atob(t_list **a, t_list **b)
 		if (k <= 3)
 		{
 			sort3(a, b, k);
-//			p_to_null(*a);
 			return (0);
 		}
 		m = find_median(*a);
@@ -183,7 +185,6 @@ int	recursive_atob(t_list **a, t_list **b)
 		while (p-- > 0)
 			rra(a);
 		sort3(a, b, k);
-//		p_to_null(*a);
 		return (0);
 	}
 	m = find_median_end(*a);
@@ -204,7 +205,8 @@ int	recursive_atob(t_list **a, t_list **b)
 
 	if (!sorted(*a))
 		recursive_atob(a, b);
-//	p_to_null(*a);	
+	else
+		p_to_null(*a);	
 	return (0);
 }
 
@@ -213,7 +215,7 @@ int	recursive_main(t_list **a, t_list **b)
 {
 	if (!sorted(*a))
 		recursive_atob(a, b);
-	else if (*b)
+	else if ((*b) != NULL)
 		p_to_null(*a);
 	else
 		return (0);
@@ -223,50 +225,57 @@ int	recursive_main(t_list **a, t_list **b)
 	int	p;
 	int np;
 
-	if (!(*b))
-		return (0);
-	k = get_size(*b);
-	p = (*b)->p;
-	np = (*a)->p + 1;	
-	if (k <= 3)
+	write(1, "\nMARK0:\n", 9);
+	if ((*b)->x > get_last(*b))
 	{
-		sort3_b(a, b, k);
-		while (k > 0)
+		printlists(*a, *b);
+		if (!(*b))
+			return (0);
+		k = get_size(*b);
+		p = (*b)->p;
+		np = (*a)->p + 1;	
+		if (k <= 3)
 		{
-			(*b)->p = np;
-			pa(a, b);
-			k--;
+			sort3_b_pa(a, b, k);
+			recursive_main(a, b);
 		}
-//		p_to_null(*a);
-//		recursive_main(a, b);
-	}
-	else if ((*b)->p == p && k > 0)
-	{
-		m = find_median(*b);
-		while ((*b)->p == p && k > 0)
+		else if ((*b)->p == p && k > 0)
 		{
-			if ((*b)->x >= m)
+			m = find_median(*b);
+			while ((*b)->p == p && k > 0)
 			{
-				pa(a, b);
-				(*a)->p = np;
-				if ((*a)->x == m)
-					ra(a);
+				if ((*b)->x >= m)
+				{
+					pa(a, b);
+					(*a)->p = np;
+					if ((*a)->x == m)
+						ra(a);
+				}
+				else
+					rb(b);
+				k--;
 			}
-			else
-				rb(b);
-			k--;
+			rra(a);
 		}
-		rra(a);
 	}
 
+	write(1, "\nMARK1:\n", 9);
+	printlists(*a, *b);
 	//recursively compute new elements on stack a
-	if (get_size(*a) >= 3 && !sorted(*a))
+	if (!sorted(*a))
 		recursive_main(a, b);
 
-//	write(1, "\nMARK1:\n", 9);
-//	printlists(*a, *b);
 	if (!(*b))
 		return (0);
+	k = get_size_end(*b);
+	m = k;
+	if (k <= 3 && (*b)->x < get_last(*b))
+	{
+		while (m-- > 0)
+			rrb(b);
+		sort3_b_pa(a, b, k);
+	}
+
 	//reversepart:
 	if ((*b)->x < get_last(*b))
 	{
@@ -307,6 +316,6 @@ int	sort(t_list **a, t_list **b)
 	recursive_first(a, b);
 //	write(1, "\nSTART\n", 9);
 	recursive_main(a, b);
-//	printlists(*a, *b);
+	//printlists(*a, *b);
 	return (0);
 }
