@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int recursive_first(t_list **a, t_list **b)
+int a_to_b(t_list **a, t_list **b)
 {
 	int m;
 	int	k;
@@ -35,7 +35,6 @@ int recursive_first(t_list **a, t_list **b)
 	rrb(b);
 	if (sorted(*a))
 		return (0);
-	recursive_first(a, b);
 	return (1);
 }
 
@@ -47,33 +46,8 @@ int	recursive_atob(t_list **a, t_list **b)
 	int	p;
 
 	if ((*a)->p >= get_last_p(*a)) 
-	{
-		p = (*b)->p + 1;
-		k = get_size(*a);
-		if (k <= 3)
-		{
-			sort3(a, b, k);
+		if (!a_to_b(a, b))
 			return (0);
-		}
-		m = find_median(*a);
-		i = 0;
-		while (i < k)
-		{
-			if ((*a)->x <= m)
-			{
-				pb(a, b);
-				(*b)->p = p;
-				if ((*b)->x == m)
-					rb(b);
-			}
-			else
-				ra(a);
-			i++;
-		}
-		rrb(b);
-		if (sorted(*a))
-			return (0);
-	}
 
 	//reverspart
 	p = (*b)->p + 1;
@@ -101,11 +75,8 @@ int	recursive_atob(t_list **a, t_list **b)
 		i++;
 	}
 	rrb(b);
-
 	if (!sorted(*a))
 		recursive_atob(a, b);
-	else
-		p_to_null(*a);	
 	return (0);
 }
 
@@ -200,9 +171,8 @@ int	recursive_main(t_list **a, t_list **b)
 
 int	sort(t_list **a, t_list **b)
 {
-//	while(!recursive_first(a, b))
-//		;
-	recursive_first(a, b);
+	while(a_to_b(a, b))
+		;
 	recursive_main(a, b);
 	return (0);
 }
