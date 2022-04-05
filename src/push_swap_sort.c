@@ -209,6 +209,19 @@ int	recursive_atob(t_list **a, t_list **b)
 	return (0);
 }
 
+int get_biggest(t_list *x)
+{
+	int b;
+
+	b = x->x;
+	while (x->next)
+	{
+		x = x->next;
+		if (b < x->x)
+			b = x->x;
+	}
+	return (b);
+}
 
 int	recursive_main(t_list **a, t_list **b)
 {
@@ -228,6 +241,10 @@ int	recursive_main(t_list **a, t_list **b)
 	if ((*b)->x > get_last(*b))
 	{
 //		printlists(*a, *b);
+		if (!(*b))
+			return (0);
+		if ((*b)->x == get_biggest(*b))
+			pa(a, b);
 		if (!(*b))
 			return (0);
 		k = get_size(*b);
