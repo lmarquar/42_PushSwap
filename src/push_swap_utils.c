@@ -36,15 +36,22 @@ int	get_size(t_list *x)
 	return (res);
 }
 
+static
+int	ft_atoicheck_init(int *i, int *x10, long *res)
+{
+	*i = 0;
+	*x10 = 1;
+	*res = 0;
+	return (0);
+}
+
 long	ft_atoicheck(char *nptr)
 {
 	int			i;
 	long		res;
 	int			x10;
 
-	i = 0;
-	x10 = 1;
-	res = 0;
+	ft_atoicheck_init(&i, &x10, &res);
 	if (nptr[i] == '-')
 		x10 = -1;
 	if (nptr[i] == '+' || nptr[i] == '-')

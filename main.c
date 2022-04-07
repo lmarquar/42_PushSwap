@@ -37,7 +37,7 @@ int	fill_list(t_list *a, int argc, char **argv)
 		a->p = 0;
 		if (!(++i < (argc - 1)))
 			break ;
-		a->next = malloc(sizeof(t_list *));
+		a->next = malloc(sizeof(t_list));
 		a = a->next;
 	}
 	a->next = NULL;
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	t_list		*a;
 	t_list		*b;
 
-	a = malloc(sizeof(t_list *));
+	a = malloc(sizeof(t_list));
 	b = NULL;
 	if (fill_list(a, argc, argv) != 0)
 	{

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int p_to_null(t_list *a)
+int	p_to_null(t_list *a)
 {
 	while (a)
 	{
@@ -19,14 +19,14 @@ int	sorted(t_list *a)
 	while (a->next)
 	{
 		if (a->x > a->next->x)
-			return (0);	
+			return (0);
 		a = a->next;
 	}
 	p_to_null(a);
 	return (1);
 }	
 
-int get_last(t_list *x)
+int	get_last(t_list *x)
 {
 	if (!x)
 		return (0);
@@ -35,7 +35,7 @@ int get_last(t_list *x)
 	return (x->x);
 }
 
-int get_last_p(t_list *x)
+int	get_last_p(t_list *x)
 {
 	if (!x)
 		return (0);
@@ -44,9 +44,9 @@ int get_last_p(t_list *x)
 	return (x->p);
 }
 
-int get_biggest(t_list *x)
+int	get_biggest(t_list *x)
 {
-	int b;
+	int	b;
 
 	b = x->x;
 	while (x->next)
@@ -57,4 +57,3 @@ int get_biggest(t_list *x)
 	}
 	return (b);
 }
-
