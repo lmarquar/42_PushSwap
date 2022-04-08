@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leon <lmarquar@student.42wolfsburg.de      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/08 15:33:41 by leon              #+#    #+#             */
+/*   Updated: 2022/04/08 15:35:31 by leon             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "src/push_swap.h"
 
 int	printlists(t_list *a, t_list *b)
@@ -94,11 +106,13 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (fill_list(a, argc, argv) != 0)
 	{
+		err();
 		free_list(a);
 		return (1);
 	}
 	if (check_list(a) != 0)
 	{
+		err();
 		free_list(a);
 		return (1);
 	}

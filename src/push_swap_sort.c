@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_sort.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leon <lmarquar@student.42wolfsburg.de      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/08 15:37:10 by leon              #+#    #+#             */
+/*   Updated: 2022/04/08 16:38:18 by leon             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	recursive_atob(t_list **a, t_list **b)
@@ -31,6 +43,8 @@ int	recursive_main(t_list **a, t_list **b)
 		else if (!k)
 			return (0);
 	}
+	if (!(*b))
+		return (0);
 	if ((*b)->x < get_last(*b) && sorted(*a))
 		if (!b_to_a_rev(a, b))
 			return (0);

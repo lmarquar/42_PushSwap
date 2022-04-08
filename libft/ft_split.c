@@ -6,12 +6,11 @@
 /*   By: lmarquar <lmarquar@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:44:09 by lmarquar          #+#    #+#             */
-/*   Updated: 2021/06/28 14:25:41 by lmarquar         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:15:38 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static char	**dparray(char *s, char c, int *size)
 {
@@ -38,7 +37,7 @@ static char	**dparray(char *s, char c, int *size)
 	return (res);
 }
 
-static char	*createString(char *s, int start, int end)
+static char	*createstring(char *s, int start, int end)
 {
 	char	*res;
 	int		i;
@@ -84,7 +83,7 @@ static char	**finish(char **res, char *s, char c, int sizeofres)
 		if (s[i] == c || !s[i])
 		{
 			end = i - 1;
-			res[sizecounter] = createString(s, start, end);
+			res[sizecounter] = createstring(s, start, end);
 			if (!res[sizecounter])
 				return (delete(res, sizecounter));
 			while (s[i] == c)

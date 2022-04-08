@@ -21,7 +21,7 @@ LOBJ	:= ft_memset.o ft_memcpy.o ft_memccpy.o ft_bzero.o \
 			 ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o
 MAIN	:= main.c
 
-all: $(LBAR) $(NAME) clean
+all: $(LBAR) $(NAME) 
 
 re: fclean all
 
@@ -45,7 +45,7 @@ clean:
 	rm -f $(POBJ) $(LOBJ)
 	rm -f $(PUAR)
 	cd $(LBDIR) && make fclean
-	rm __.SYMDEF\ SORTED
+	rm -f __.SYMDEF\ SORTED
 
 fclean:
 	rm -f $(POBJ) $(LOBJ)

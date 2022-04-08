@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leon <lmarquar@student.42wolfsburg.de      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/08 15:36:20 by leon              #+#    #+#             */
+/*   Updated: 2022/04/08 16:01:11 by leon             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static
@@ -56,8 +68,8 @@ int	sort5(t_list **a, t_list **b)
 
 int	push_swap(t_list **a, t_list **b)
 {
-	t_list *temp;
-	int i;
+	t_list	*temp;
+	int		i;
 
 	temp = *a;
 	while (temp)
@@ -69,20 +81,13 @@ int	push_swap(t_list **a, t_list **b)
 		temp = temp->next;
 	}
 	temp = *a;
-	i = 0;
-	while(i <= 5 && temp)
-	{
-		temp = temp->next;
-		i++;
-	}
-	if (i <= 1)
-		return (0);
-	else if (i <= 2)
+	i = get_size(*a);
+	if (i == 2)
 	{
 		if ((*a)->x > (*a)->next->x)
 			sa(*a);
 	}
-	else if (i <= 5)
+	else if (i <= 5 && i > 2)
 		sort5(a, b);
 	else
 		sort(a, b);

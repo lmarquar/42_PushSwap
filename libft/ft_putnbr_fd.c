@@ -6,7 +6,7 @@
 /*   By: lmarquar <lmarquar@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 13:30:54 by lmarquar          #+#    #+#             */
-/*   Updated: 2021/06/04 13:30:54 by lmarquar         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:13:09 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putnbr_fd(int n, int fd)
 
 	nl = n;
 	if (n == 0)
-		write(1, "0", 1);
+		c = '0';
 	else if (nl < -9 || nl > 9)
 	{
 		if (nl < -9)
@@ -28,17 +28,13 @@ void	ft_putnbr_fd(int n, int fd)
 			c = (nl % 10) + '0';
 		nl = nl / 10;
 		ft_putnbr_fd(nl, fd);
-		write(fd, &c, 1);
 	}
 	else if (nl < 0)
 	{
 		c = (nl * -1) + '0';
 		write(fd, "-", 1);
-		write(fd, &c, 1);
 	}
 	else
-	{
 		c = nl + '0';
-		write(fd, &c, 1);
-	}
+	write(1, &c, 1);
 }
