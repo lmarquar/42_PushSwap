@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leon <lmarquar@student.42wolfsburg.de      +#+  +:+       +#+        */
+/*   By: lmarquar <lmarquar@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:33:41 by leon              #+#    #+#             */
-/*   Updated: 2022/04/08 15:35:31 by leon             ###   ########.fr       */
+/*   Updated: 2022/11/29 18:21:07 by lmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	push_swap(&a, &b);
+//	printlists(a, b);
 	free_list(a);
 	return (1);
 }
