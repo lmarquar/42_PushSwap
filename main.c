@@ -6,7 +6,7 @@
 /*   By: lmarquar <lmarquar@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:33:41 by leon              #+#    #+#             */
-/*   Updated: 2022/11/29 18:21:07 by lmarquar         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:34:23 by lmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	printlists(t_list *a, t_list *b)
 	while (a)
 	{
 		ft_putnbr_fd(a->x, 1);
-		write(1, ", ", 2);
-		ft_putnbr_fd(a->p, 1);
 		a = a->next;
 		write(1, "\n", 1);
 	}
@@ -27,8 +25,6 @@ int	printlists(t_list *a, t_list *b)
 	while (b)
 	{
 		ft_putnbr_fd(b->x, 1);
-		write(1, ", ", 2);
-		ft_putnbr_fd(b->p, 1);
 		b = b->next;
 		write(1, "\n", 1);
 	}
@@ -117,7 +113,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	push_swap(&a, &b);
-//	printlists(a, b);
+	printlists(a, b);
 	free_list(a);
 	return (1);
 }
